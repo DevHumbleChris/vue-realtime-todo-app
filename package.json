@@ -19,5 +19,21 @@
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "vite": "^4.0.0"
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "vite.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevHumbleChris/vue-realtime-todo-app.git"
+  },
+  "keywords": [
+    "todo-app",
+    "vue"
+  ],
+  "author": "AmChrisKE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DevHumbleChris/vue-realtime-todo-app/issues"
+  },
+  "homepage": "https://github.com/DevHumbleChris/vue-realtime-todo-app#readme"
 }
