@@ -1,8 +1,9 @@
 <script setup>
+import TheWrapper from '@/components/TheWrapper.vue'
 </script>
 
 <template>
   <main>
-    Vue Mombasa Community Todo App
+    <TheWrapper />
   </main>
 </template>
