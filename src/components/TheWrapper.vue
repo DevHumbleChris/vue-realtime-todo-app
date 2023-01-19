@@ -3,9 +3,20 @@ import AddTodo from '@/components/AddTodo.vue'
 import TheTodo  from '@/components/TheTodo.vue'
 import TodoStats from '@/components/TodoStats.vue';
 import { useTodoStore } from '@/stores/todo'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from '@/firebaseConfig'
+import { onMounted } from 'vue'
 
 const store = useTodoStore()
 const todos = store.todos
+
+onMounted(async () => {
+    onSnapshot(collection(db, 'todos'), (querySnapshot) => {
+        querySnapshot.forEach(doc => {
+            store.setTodos({...doc.data(), id: doc.id})
+        })
+    })
+})
 </script>
 
 <template>
