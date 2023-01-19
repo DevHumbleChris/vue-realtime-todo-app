@@ -1,7 +1,6 @@
-# vue-realtime-todo-app
+# Vue Realtime Todo App
 
-This template should help get you started developing with Vue 3 in Vite.
-
+Vue Realtime Todo App - Built with Vue, TailwindCSS, Firebase, and Pinia State Management.
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
