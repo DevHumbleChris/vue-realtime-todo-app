@@ -5,16 +5,20 @@ import TodoStats from '@/components/TodoStats.vue';
 import { useTodoStore } from '@/stores/todo'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '@/firebaseConfig'
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const store = useTodoStore()
-const todos = store.todos
+const todos = computed(() => {
+    return store.todos
+})
 
 onMounted(async () => {
     onSnapshot(collection(db, 'todos'), (querySnapshot) => {
+        let fbTodos = []
         querySnapshot.forEach(doc => {
-            store.setTodos({...doc.data(), id: doc.id})
+            fbTodos.push({...doc.data(), id: doc.id})
         })
+        store.setTodos(fbTodos)
     })
 })
 </script>
@@ -25,7 +29,13 @@ onMounted(async () => {
         <div>
             <TodoStats />
             <AddTodo />
-            <TheTodo v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index" />
+            <div v-if="todos.length > 0">
+                <TheTodo v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index" />
+            </div>
+            <div v-else class="flex items-center space-x-2 justify-center my-10">
+                <div class="animate-ping w-8 h-8 rounded-full bg-sky-400"></div>
+                <p>Loading Todos...</p>
+            </div>
         </div>
     </section>
 </template>

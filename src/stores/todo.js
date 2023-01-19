@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 export const useTodoStore = defineStore('todo', {
     state: () =>{
         return {
-            todos: []
+            todos: [],
+            loadTodos: true
         }
     },
     actions: {
@@ -16,8 +17,11 @@ export const useTodoStore = defineStore('todo', {
         removeTodo(index) {
             this.todos.splice(index, 1)
         },
-        setTodos(todo) {
-            this.todos.push(todo)
+        setTodos(todos) {
+            this.todos = todos
+        },
+        setLoadTodos() {
+            this.loadTodos = !this.loadTodos
         }
     }
 })
