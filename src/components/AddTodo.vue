@@ -1,14 +1,14 @@
 <script setup>
 import { ref } from 'vue'
-import { useTodoStore } from '@/stores/todo'
-
-const store = useTodoStore()
+import { addDoc, collection, serverTimestamp } from '@firebase/firestore'
+import { db } from '@/firebaseConfig'
 const singleTodo = ref('')
 
-const addTodo = () => {
-  store.addTodos({
-    name: singleTodo.value,
-    isCompleted: false
+const addTodo = async () => {
+  await addDoc(collection(db, 'todos'), {
+    title: singleTodo.value,
+    isCompleted: false,
+    timestamp: serverTimestamp()
   })
   singleTodo.value = ''
 }
