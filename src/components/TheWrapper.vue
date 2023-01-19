@@ -30,7 +30,7 @@ onMounted(async () => {
             <TodoStats />
             <AddTodo />
             <div v-if="todos.length > 0">
-                <TheTodo v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index" />
+                <TheTodo v-for="todo in todos" :key="todo.id" :todo="todo" />
             </div>
             <div v-else class="flex items-center space-x-2 justify-center my-10">
                 <div class="animate-ping w-8 h-8 rounded-full bg-sky-400"></div>
