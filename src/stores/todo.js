@@ -23,5 +23,21 @@ export const useTodoStore = defineStore('todo', {
         setLoadTodos() {
             this.loadTodos = !this.loadTodos
         }
+    },
+    getters: {
+        completed: (state) => {
+            let completed = []
+            if (state.todos > 0) {
+                completed = state?.todos?.filter(todo => todo.isCompleted)
+            }
+            return completed?.length
+        },
+        incompleted: (state) => {
+            let incompleted = []
+            if (state.todos > 0) {
+                incompleted = state?.todos?.filter(todo => !todo.isCompleted)
+            }
+            return incompleted?.length
+        }
     }
 })

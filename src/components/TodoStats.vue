@@ -1,9 +1,14 @@
 <script setup>
 import { useTodoStore } from '@/stores/todo'
+import { computed } from 'vue'
 
 const store = useTodoStore()
-const completed = store.completed
-const incompleted = store.incompleted
+const completed = computed(() => {
+    return store.completed
+})
+const incompleted = computed(() => {
+    return store.incompleted
+})
 </script>
 
 <template>
