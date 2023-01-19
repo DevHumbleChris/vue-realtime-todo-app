@@ -3,7 +3,7 @@ import AddTodo from '@/components/AddTodo.vue'
 import TheTodo  from '@/components/TheTodo.vue'
 import TodoStats from '@/components/TodoStats.vue';
 import { useTodoStore } from '@/stores/todo'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy } from 'firebase/firestore'
 import { db } from '@/firebaseConfig'
 import { computed, onMounted } from 'vue'
 
@@ -13,12 +13,12 @@ const todos = computed(() => {
 })
 
 onMounted(async () => {
-    onSnapshot(collection(db, 'todos'), (querySnapshot) => {
+    onSnapshot(collection(db, 'todos'), orderBy('timestamp', 'desc'), (querySnapshot) => {
         let fbTodos = []
         querySnapshot.forEach(doc => {
             fbTodos.push({...doc.data(), id: doc.id})
         })
-        store.setTodos(fbTodos)
+        store.addTodos(fbTodos)
     })
 })
 </script>
@@ -31,6 +31,9 @@ onMounted(async () => {
             <AddTodo />
             <div v-if="todos.length > 0">
                 <TheTodo v-for="todo in todos" :key="todo.id" :todo="todo" />
+            </div>
+            <div v-else-if="todos.length === 0" class="text-center my-4">
+                No Todos! Please add Todos.
             </div>
             <div v-else class="flex items-center space-x-2 justify-center my-10">
                 <div class="animate-ping w-8 h-8 rounded-full bg-sky-400"></div>

@@ -4,10 +4,12 @@ import { computed } from 'vue'
 
 const store = useTodoStore()
 const completed = computed(() => {
-    return store.completed
+    let completed = store.todos.filter(todo => todo.isCompleted)
+    return completed.length
 })
 const incompleted = computed(() => {
-    return store.incompleted
+    let iscompleted = store.todos.filter(todo => !todo.isCompleted)
+    return iscompleted.length
 })
 </script>
 

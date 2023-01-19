@@ -1,11 +1,8 @@
 <script setup>
 import { TrashIcon, CheckBadgeIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { useTodoStore } from '@/stores/todo';
 import { computed } from 'vue'
-import { doc, updateDoc } from '@firebase/firestore';
+import { deleteDoc, doc, updateDoc } from '@firebase/firestore';
 import { db } from '@/firebaseConfig'
-
-const store = useTodoStore()
 
 const props = defineProps({
     todo: Object
@@ -21,8 +18,8 @@ const checkTodo = async (id) => {
   })
 }
 
-const removeTodo = (index) => {
-    store.removeTodo(index)
+const removeTodo = async (id) => {
+    await deleteDoc(doc(db, 'todos', id))
 }
 </script>
 
