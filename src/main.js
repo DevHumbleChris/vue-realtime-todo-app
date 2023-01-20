@@ -11,7 +11,7 @@ let app;
 
 auth.onAuthStateChanged(() => {
   if (!app) {
-    createApp(App);
+    app = createApp(App);
     app.use(createPinia());
     app.use(router);
     app.mount("#app");
